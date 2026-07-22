@@ -1,0 +1,80 @@
+{
+  "perguntas": [
+    {
+      "id": "1",
+      "enunciado": "Qual sua linguagem de programação favorita?",
+      "tipo": "multipla_escolha",
+      "obrigatoria": true,
+      "alternativas": [
+        "JavaScript",
+        "Python",
+        "Java",
+        "C#"
+      ],
+      "criadaEm": "2026-07-01T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "enunciado": "Descreva sua experiência com o curso:",
+      "tipo": "texto_longo",
+      "obrigatoria": true,
+      "alternativas": [],
+      "criadaEm": "2026-07-01T10:30:00.000Z"
+    },
+    {
+      "id": "3",
+      "enunciado": "Quais áreas você gostaria de aprender mais?",
+      "tipo": "checkbox",
+      "obrigatoria": false,
+      "alternativas": [
+        "Front-end",
+        "Back-end",
+        "DevOps",
+        "Mobile",
+        "Cloud"
+      ],
+      "criadaEm": "2026-07-01T11:00:00.000Z"
+    }
+  ],
+  "formularios": [
+    {
+      "titulo": "Pesquisa de satisfação",
+      "descricao": "Avalie sua experiência com o nosso curso.",
+      "status": "encerrado",
+      "dataInicio": "2026-07-22T06:00",
+      "dataFim": "2026-07-22T16:18",
+      "perguntas": [
+        "1",
+        "2",
+        "3"
+      ],
+      "criadoEm": "2026-07-22T16:25:11.317Z",
+      "id": "1"
+    }
+  ],
+  "respostas": [
+    {
+      "formularioId": "1",
+      "nome": "jao vitor santos martins",
+      "email": "jaoaovmaritn@hotmail.com",
+      "respostas": [
+        {
+          "perguntaId": "1",
+          "valor": "Java"
+        },
+        {
+          "perguntaId": "2",
+          "valor": "nenhum"
+        },
+        {
+          "perguntaId": "3",
+          "valor": [
+            "DevOps"
+          ]
+        }
+      ],
+      "enviadoEm": "2026-07-22T14:20:55.366Z",
+      "id": 1
+    }
+  ]
+}
