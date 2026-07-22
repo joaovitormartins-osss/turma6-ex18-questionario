@@ -1,3 +1,7 @@
+// ============================================
+// MÓDULO RESPOSTAS - CRUD e Validações
+// ============================================
+
 let respostasCache = [];
 
 function validarEmail(email) {
@@ -71,6 +75,9 @@ function renderizarRespostas(respostas, formularios, filtroFormularioId = null) 
         const nomeFormulario = formulario ? formulario.titulo : 'Formulário removido';
         const data = r.enviadoEm ? formatarData(r.enviadoEm) : '—';
 
+        // CONVERTER ID PARA STRING PARA GARANTIR COMPARAÇÃO
+        const respostaId = String(r.id);
+
         html += `
             <tr>
                 <td><strong>${r.nome || 'Anônimo'}</strong></td>
@@ -78,10 +85,10 @@ function renderizarRespostas(respostas, formularios, filtroFormularioId = null) 
                 <td>${nomeFormulario}</td>
                 <td>${data}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm" onclick="visualizarResposta('${r.id}')" title="Ver detalhes">
+                    <button class="btn btn-primary btn-sm" onclick="visualizarResposta('${respostaId}')" title="Ver detalhes">
                         <i class="fas fa-eye"></i>
                     </button>
-                    <button class="btn btn-danger btn-sm" onclick="excluirResposta('${r.id}')" title="Excluir">
+                    <button class="btn btn-danger btn-sm" onclick="excluirResposta('${respostaId}')" title="Excluir">
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>
@@ -93,6 +100,7 @@ function renderizarRespostas(respostas, formularios, filtroFormularioId = null) 
     container.innerHTML = html;
 }
 
+// ========== CARREGAR RESPOSTAS ==========
 async function carregarRespostas(filtroFormularioId = null) {
     mostrarLoading(true);
     try {
@@ -101,7 +109,10 @@ async function carregarRespostas(filtroFormularioId = null) {
             apiFormularios.listar()
         ]);
 
+        // ATUALIZAR O CACHE COM OS DADOS RECEBIDOS
         respostasCache = respostas;
+        console.log('📦 Cache atualizado com:', respostasCache.length, 'respostas');
+        
         renderizarRespostas(respostas, formularios, filtroFormularioId);
 
         if (typeof paginaAtual !== 'undefined' && paginaAtual === 'dashboard') {
@@ -133,9 +144,13 @@ async function carregarRespostas(filtroFormularioId = null) {
     }
 }
 
+// ========== VISUALIZAR RESPOSTA ==========
 async function visualizarResposta(id) {
     try {
-        const resposta = await apiRespostas.buscar(id);
+        // CONVERTER ID PARA STRING
+        const respostaId = String(id);
+        const resposta = await apiRespostas.buscar(respostaId);
+        
         if (!resposta) {
             Swal.fire({
                 icon: 'error',
@@ -196,14 +211,40 @@ async function visualizarResposta(id) {
     }
 }
 
+// ========== EXCLUIR RESPOSTA - CORRIGIDA ==========
 async function excluirResposta(id) {
-    console.log('🔴 Tentando excluir resposta ID:', id);
+    // CONVERTER ID PARA STRING PARA GARANTIR COMPARAÇÃO
+    const respostaId = String(id);
+    console.log('🔴 Tentando excluir resposta ID:', respostaId);
+    console.log('📦 Cache atual:', respostasCache);
     
     try {
-        const resposta = respostasCache.find(r => r.id === id);
+        // Buscar a resposta no cache COMPARANDO COMO STRING
+        const resposta = respostasCache.find(r => String(r.id) === respostaId);
         
         if (!resposta) {
             console.error('❌ Resposta não encontrada no cache');
+            console.log('🔍 IDs no cache:', respostasCache.map(r => String(r.id)));
+            
+            // Tentar buscar diretamente da API
+            try {
+                const respostaApi = await apiRespostas.buscar(respostaId);
+                if (respostaApi) {
+                    console.log('✅ Resposta encontrada na API, atualizando cache...');
+                    // Atualizar o cache com a resposta
+                    const index = respostasCache.findIndex(r => String(r.id) === respostaId);
+                    if (index !== -1) {
+                        respostasCache[index] = respostaApi;
+                    } else {
+                        respostasCache.push(respostaApi);
+                    }
+                    // Chamar a função novamente com a resposta encontrada
+                    return excluirResposta(respostaId);
+                }
+            } catch (apiError) {
+                console.error('❌ Erro ao buscar resposta na API:', apiError);
+            }
+            
             Swal.fire({
                 icon: 'error',
                 title: 'Erro!',
@@ -234,13 +275,15 @@ async function excluirResposta(id) {
         console.log('✅ Confirmado, excluindo...');
         mostrarLoading(true);
 
-        const resultado = await apiRespostas.excluir(id);
+        const resultado = await apiRespostas.excluir(respostaId);
         console.log('📡 Resultado da API:', resultado);
         
         if (resultado) {
-            respostasCache = respostasCache.filter(r => r.id !== id);
+            // Remover do cache local
+            respostasCache = respostasCache.filter(r => String(r.id) !== respostaId);
             console.log('🗑️ Removido do cache. Total restante:', respostasCache.length);
             
+            // Recarregar a lista
             await carregarRespostas();
             
             Swal.fire({
@@ -271,6 +314,7 @@ async function excluirResposta(id) {
     }
 }
 
+// ========== ENVIAR RESPOSTA ==========
 async function enviarResposta(event) {
     event.preventDefault();
     
@@ -495,6 +539,7 @@ async function enviarResposta(event) {
     }
 }
 
+// ========== EVENTOS ==========
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('formResponder');
     if (form) {
@@ -502,6 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// ========== EXPOR FUNÇÕES GLOBAIS ==========
 window.carregarRespostas = carregarRespostas;
 window.visualizarResposta = visualizarResposta;
 window.excluirResposta = excluirResposta;

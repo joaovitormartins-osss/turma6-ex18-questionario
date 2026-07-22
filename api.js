@@ -101,12 +101,27 @@ const apiRespostas = {
         return handleResponse(response);
     },
     async excluir(id) {
-        const response = await fetch(`${API_BASE}/respostas/${id}`, { method: 'DELETE', headers: getHeaders() });
-        if (!response.ok) {
-            const error = await response.json().catch(() => ({}));
-            throw new Error(error.message || `Erro ${response.status}: ${response.statusText}`);
+        try {
+            console.log('📡 API: Excluindo resposta ID:', id);
+            const response = await fetch(`${API_BASE}/respostas/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({}));
+                throw new Error(error.message || `Erro ${response.status}: ${response.statusText}`);
+            }
+
+            console.log('✅ Resposta excluída com sucesso');
+            return true;
+        } catch (error) {
+            console.error('❌ Erro na API ao excluir:', error);
+            throw error;
         }
-        return true;
     }
 };
 

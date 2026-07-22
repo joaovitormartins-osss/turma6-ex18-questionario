@@ -40,17 +40,41 @@
     {
       "titulo": "Pesquisa de satisfação",
       "descricao": "Avalie sua experiência com o nosso curso.",
-      "status": "encerrado",
-      "dataInicio": "2026-07-22T06:00",
-      "dataFim": "2026-07-22T16:18",
+      "status": "publicado",
+      "dataInicio": "2026-07-22T09:00",
+      "dataFim": "2026-07-22T19:18",
       "perguntas": [
         "1",
         "2",
         "3"
       ],
-      "criadoEm": "2026-07-22T16:25:11.317Z",
+      "criadoEm": "2026-07-22T18:26:53.343Z",
       "id": "1"
     }
   ],
-  "respostas": [ ]
+  "respostas": [
+    {
+      "formularioId": "1",
+      "nome": "João Vitor Santos Martins",
+      "email": "joaovmartins01@gmail.com",
+      "respostas": [
+        {
+          "perguntaId": "1",
+          "valor": "JavaScript"
+        },
+        {
+          "perguntaId": "2",
+          "valor": "Não tenho nenhuma experiencia"
+        },
+        {
+          "perguntaId": "3",
+          "valor": [
+            "Front-end"
+          ]
+        }
+      ],
+      "enviadoEm": "2026-07-22T18:27:49.671Z",
+      "id": 1
+    }
+  ]
 }
