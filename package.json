@@ -10,11 +10,7 @@
   "dependencies": {
     "json-server": "^0.17.4"
   },
-  "keywords": [
-    "questionario",
-    "formulario",
-    "json-server"
-  ],
+  "keywords": ["questionario", "formulario", "json-server"],
   "author": "",
   "license": "MIT"
 }

@@ -1,4 +1,3 @@
-/* ========== RESET & BASE ========== */
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +7,6 @@
 :root {
     --primary: #4F46E5;
     --primary-dark: #4338CA;
-    --primary-light: #818CF8;
     --success: #10B981;
     --warning: #F59E0B;
     --danger: #EF4444;
@@ -28,24 +26,21 @@
     --radius-sm: 8px;
     --sidebar-width: 260px;
     --topbar-height: 64px;
-    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: 0.3s ease;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--gray-50);
     color: var(--gray-800);
     display: flex;
     min-height: 100vh;
 }
 
-/* ========== SCROLLBAR ========== */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--gray-100); }
 ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
 
-/* ========== SIDEBAR ========== */
 .sidebar {
     width: var(--sidebar-width);
     min-height: 100vh;
@@ -77,13 +72,13 @@ body {
 }
 
 .sidebar-header h1 i {
-    color: var(--primary-light);
+    color: #818CF8;
     font-size: 24px;
 }
 
 .sidebar-menu {
     list-style: none;
-    padding: 12px 12px;
+    padding: 12px;
     flex: 1;
     overflow-y: auto;
 }
@@ -143,7 +138,6 @@ body {
     50% { opacity: 0.4; }
 }
 
-/* ========== MAIN CONTENT ========== */
 .main-content {
     flex: 1;
     margin-left: var(--sidebar-width);
@@ -152,7 +146,6 @@ body {
     min-height: 100vh;
 }
 
-/* ========== TOP BAR ========== */
 .top-bar {
     height: var(--topbar-height);
     background: white;
@@ -194,14 +187,12 @@ body {
     color: var(--gray-500);
 }
 
-/* ========== CONTENT AREA ========== */
 .content-area {
     flex: 1;
     padding: 24px 32px;
     padding-bottom: 40px;
 }
 
-/* ========== CARDS / STATS ========== */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -252,7 +243,6 @@ body {
     color: var(--gray-500);
 }
 
-/* ========== SECTION HEADER ========== */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -268,13 +258,6 @@ body {
     color: var(--gray-800);
 }
 
-.section-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-/* ========== BUTTONS ========== */
 .btn {
     padding: 8px 20px;
     border: none;
@@ -305,7 +288,6 @@ body {
 }
 .btn-success:hover {
     background: #059669;
-    transform: translateY(-1px);
 }
 
 .btn-danger {
@@ -337,17 +319,6 @@ body {
     font-size: 12px;
 }
 
-.btn-icon {
-    padding: 8px;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* ========== TABLE ========== */
 .table-container {
     background: white;
     border-radius: var(--radius);
@@ -391,10 +362,6 @@ table tbody tr:hover {
     background: var(--gray-50);
 }
 
-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
 .status-badge {
     display: inline-block;
     padding: 2px 12px;
@@ -416,7 +383,6 @@ table tbody tr:last-child td {
     color: #991B1B;
 }
 
-/* ========== MODAL ========== */
 .modal {
     display: none;
     position: fixed;
@@ -502,7 +468,6 @@ table tbody tr:last-child td {
     gap: 12px;
 }
 
-/* ========== FORMS ========== */
 .form-group {
     margin-bottom: 16px;
 }
@@ -563,7 +528,6 @@ table tbody tr:last-child td {
     margin-top: 4px;
 }
 
-/* ========== ALTERNATIVAS ========== */
 .alternativa-row {
     display: flex;
     gap: 8px;
@@ -586,7 +550,6 @@ table tbody tr:last-child td {
     font-size: 20px;
     cursor: pointer;
     padding: 0 4px;
-    transition: var(--transition);
 }
 .btn-remove-alt:hover {
     color: var(--danger);
@@ -600,17 +563,14 @@ table tbody tr:last-child td {
     cursor: pointer;
     font-size: 13px;
     color: var(--gray-600);
-    transition: var(--transition);
     display: inline-flex;
     align-items: center;
     gap: 6px;
 }
 .btn-add-alt:hover {
     background: var(--gray-200);
-    border-color: var(--gray-400);
 }
 
-/* ========== PERGUNTAS CHECKLIST ========== */
 .pergunta-check-item {
     display: flex;
     align-items: center;
@@ -644,7 +604,6 @@ table tbody tr:last-child td {
     color: var(--gray-600);
 }
 
-/* ========== RESPONDER PERGUNTAS ========== */
 .pergunta-responder {
     background: var(--gray-50);
     padding: 16px 20px;
@@ -704,7 +663,6 @@ table tbody tr:last-child td {
     cursor: pointer;
 }
 
-/* ========== LOADING ========== */
 .loading-overlay {
     display: none;
     position: fixed;
@@ -714,7 +672,7 @@ table tbody tr:last-child td {
     height: 100%;
     background: rgba(255,255,255,0.8);
     backdrop-filter: blur(2px);
-    z-index: 9998;
+    z-index: 9999;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -738,7 +696,6 @@ table tbody tr:last-child td {
     to { transform: rotate(360deg); }
 }
 
-/* ========== RESPOSTA DETALHE ========== */
 .resposta-detalhe {
     margin-bottom: 16px;
     padding-bottom: 16px;
@@ -765,7 +722,6 @@ table tbody tr:last-child td {
     color: var(--gray-700);
 }
 
-/* ========== EMPTY STATE ========== */
 .empty-state {
     text-align: center;
     padding: 48px 24px;
@@ -788,27 +744,20 @@ table tbody tr:last-child td {
     font-size: 14px;
 }
 
-/* ========== SWEETALERT ========== */
 .swal2-popup {
     font-family: 'Inter', sans-serif !important;
     border-radius: var(--radius) !important;
-    z-index: 9999 !important;
+    z-index: 99999 !important;
 }
 
 .swal2-confirm {
     background: var(--primary) !important;
 }
-
 .swal2-cancel {
     background: var(--gray-200) !important;
     color: var(--gray-700) !important;
 }
 
-.swal2-danger {
-    background: var(--danger) !important;
-}
-
-/* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -860,9 +809,6 @@ table tbody tr:last-child td {
     .section-header {
         flex-direction: column;
         align-items: stretch;
-    }
-    .section-actions {
-        flex-wrap: wrap;
     }
     .section-actions .btn {
         flex: 1;

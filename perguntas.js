@@ -460,3 +460,6 @@ window.novaPergunta = novaPergunta;
 window.adicionarAlternativa = adicionarAlternativa;
 window.removerAlternativa = removerAlternativa;
 window.salvarPergunta = salvarPergunta;
+
+
+

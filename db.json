@@ -9,7 +9,7 @@
         "JavaScript",
         "Python",
         "Java",
-        "C#"
+        "CSS"
       ],
       "criadaEm": "2026-07-01T10:00:00.000Z"
     },
@@ -52,29 +52,5 @@
       "id": "1"
     }
   ],
-  "respostas": [
-    {
-      "formularioId": "1",
-      "nome": "jao vitor santos martins",
-      "email": "jaoaovmaritn@hotmail.com",
-      "respostas": [
-        {
-          "perguntaId": "1",
-          "valor": "Java"
-        },
-        {
-          "perguntaId": "2",
-          "valor": "nenhum"
-        },
-        {
-          "perguntaId": "3",
-          "valor": [
-            "DevOps"
-          ]
-        }
-      ],
-      "enviadoEm": "2026-07-22T14:20:55.366Z",
-      "id": 1
-    }
-  ]
+  "respostas": [ ]
 }

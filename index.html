@@ -5,58 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Cadastro de Questionários</title>
     
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- SIDEBAR -->
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h1><i class="fas fa-clipboard-list"></i> Questionários</h1>
         </div>
         <ul class="sidebar-menu">
-            <li class="active" data-page="dashboard">
-                <i class="fas fa-chart-pie"></i> Dashboard
-            </li>
-            <li data-page="perguntas">
-                <i class="fas fa-question-circle"></i> Perguntas
-            </li>
-            <li data-page="formularios">
-                <i class="fas fa-file-alt"></i> Formulários
-            </li>
-            <li data-page="respostas">
-                <i class="fas fa-reply-all"></i> Respostas
-            </li>
+            <li class="active" data-page="dashboard"><i class="fas fa-chart-pie"></i> Dashboard</li>
+            <li data-page="perguntas"><i class="fas fa-question-circle"></i> Perguntas</li>
+            <li data-page="formularios"><i class="fas fa-file-alt"></i> Formulários</li>
+            <li data-page="respostas"><i class="fas fa-reply-all"></i> Respostas</li>
         </ul>
         <div class="sidebar-footer">
             <span class="status-dot"></span> Sistema Online
         </div>
     </nav>
 
-    <!-- MAIN CONTENT -->
     <main class="main-content">
         <header class="top-bar">
             <div class="top-bar-left">
-                <button class="menu-toggle" id="menuToggle">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
                 <h2 id="pageTitle">Dashboard</h2>
             </div>
             <div class="top-bar-right">
                 <span class="datetime" id="datetime"></span>
             </div>
         </header>
-
         <section class="content-area" id="contentArea"></section>
     </main>
 
@@ -70,12 +50,10 @@
             <div class="modal-body">
                 <form id="formPergunta">
                     <input type="hidden" id="perguntaId" value="">
-                    
                     <div class="form-group">
                         <label for="enunciado">Enunciado *</label>
                         <textarea id="enunciado" rows="2" placeholder="Digite o enunciado da pergunta"></textarea>
                     </div>
-
                     <div class="form-group">
                         <label for="tipoPergunta">Tipo *</label>
                         <select id="tipoPergunta">
@@ -85,13 +63,9 @@
                             <option value="checkbox">Checkbox</option>
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <label>
-                            <input type="checkbox" id="obrigatoria"> Obrigatória
-                        </label>
+                        <label><input type="checkbox" id="obrigatoria"> Obrigatória</label>
                     </div>
-
                     <div class="form-group" id="alternativasGroup">
                         <label>Alternativas *</label>
                         <div id="alternativasContainer">
@@ -107,9 +81,8 @@
                         <button type="button" class="btn-add-alt" onclick="adicionarAlternativa()">
                             <i class="fas fa-plus"></i> Adicionar Alternativa
                         </button>
-                        <small class="helper-text" id="altHelper">Mín: 2 | Máx: 10 (Múltipla Escolha)</small>
+                        <small class="helper-text" id="altHelper">Mín: 2 | Máx: 10</small>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" onclick="fecharModal('modalPergunta')">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -129,17 +102,14 @@
             <div class="modal-body">
                 <form id="formFormulario">
                     <input type="hidden" id="formularioId" value="">
-                    
                     <div class="form-group">
                         <label for="titulo">Título *</label>
                         <input type="text" id="titulo" placeholder="Digite o título do formulário">
                     </div>
-
                     <div class="form-group">
                         <label for="descricao">Descrição</label>
                         <textarea id="descricao" rows="2" placeholder="Digite a descrição do formulário"></textarea>
                     </div>
-
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status">
@@ -148,7 +118,6 @@
                             <option value="encerrado">Encerrado</option>
                         </select>
                     </div>
-
                     <div class="form-row">
                         <div class="form-group">
                             <label for="dataInicio">Data Início</label>
@@ -159,12 +128,10 @@
                             <input type="datetime-local" id="dataFim">
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label>Perguntas * (selecione pelo menos 1)</label>
                         <div id="perguntasChecklist"></div>
                     </div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" onclick="fecharModal('modalFormulario')">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Salvar</button>
@@ -175,16 +142,15 @@
     </div>
 
     <!-- MODAL RESPONDER -->
-    <div class="modal modal-responder" id="modalResponder" style="z-index: 1000;">
-        <div class="modal-content" style="max-width: 800px; max-height: 90vh;">
+    <div class="modal modal-responder" id="modalResponder">
+        <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modalResponderTitle">Responder Formulário</h3>
                 <button class="modal-close" onclick="fecharModal('modalResponder')">&times;</button>
             </div>
-            <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
+            <div class="modal-body">
                 <form id="formResponder">
                     <input type="hidden" id="responderFormularioId" value="">
-                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="responderNome">Nome *</label>
@@ -195,9 +161,7 @@
                             <input type="email" id="responderEmail" placeholder="Digite seu e-mail">
                         </div>
                     </div>
-
                     <div id="perguntasResponder"></div>
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" onclick="fecharModal('modalResponder')">Cancelar</button>
                         <button type="submit" class="btn btn-primary" id="btnEnviarResposta">
@@ -220,13 +184,12 @@
         </div>
     </div>
 
-    <!-- LOADING OVERLAY -->
+    <!-- LOADING -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <p>Carregando...</p>
     </div>
 
-    <!-- JavaScript -->
     <script src="api.js"></script>
     <script src="perguntas.js"></script>
     <script src="formularios.js"></script>
